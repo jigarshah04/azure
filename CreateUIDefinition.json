@@ -1,0 +1,187 @@
+{
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.0.1-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Compute.UserNameTextBox",
+        "label": "Username",
+        "toolTip": "Userrname. Use same credientials for SSH to VM-Series",
+        "osPlatform": "Linux"
+      },
+      {
+        "name": "SSHCredntials",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+                  "authenticationType": "Authentication type",
+                  "password": "Password",
+                  "confirmPassword": "Confirm password",
+                  "sshPublicKey": "SSH public key"
+                },
+        "toolTip": {
+                "authenticationType": "",
+                "password": "",
+                "sshPublicKey": ""
+              },
+         "constraints": {
+                "required": true
+              },
+         "options": {
+              "hideConfirmation": false
+         },
+         "osPlatform": "Linux"
+       }
+    ],
+    "steps": [
+      {
+        "name": "panvnetconfig",
+        "label": "VM-Series Storage and Networking configuration",
+        "subLabel": {
+          "preValidation": "Configure VM-Series",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "VM-Series Storage and Networking configuration",
+        "elements": [
+            {
+               "name": "newStorageAccount",
+               "type": "Microsoft.Storage.StorageAccountSelector",
+               "label": "Storage Account Name",
+               "defaultValue": {
+                   "type": "Standard_LRS"
+               }
+            },
+            {
+               "name": "ipAddressPrefix",
+               "type": "Microsoft.Common.TextBox",
+               "label": "VNET IP address prefix/CIDR",
+               "toolTip": "Uses /16 CIDR for VNET",
+               "defaultValue": "192.168",
+               "osPlatform": "Linux"
+            },
+            {
+               "name": "srcIPInboundNSG",
+               "type": "Microsoft.Common.TextBox",
+               "label": "NSG's inbound source IP",
+               "toolTip": "Your source IP to restrict access from the Internet",
+               "defaultValue": "199.167.55.50/32",
+               "osPlatform": "Linux"
+            }
+          ]
+      },
+      {
+        "name": "SamplePANVMConfig",
+        "label": "VM-Series configuration",
+        "subLabel": {
+          "preValidation": "Configure PA-VM",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "VM-Series Configuration",
+        "elements": [
+         {
+            "name": "dnsNameForPublicIP",
+            "type": "Microsoft.Network.PublicIpAddressCombo",
+            "label": {
+                "publicIpAddress": "Public IP address",
+                "domainNameLabel": "DNS Prefix"
+            },
+            "toolTip": {
+                "domainNameLabel": "Globally unique DNS name for eth0 (MGMT) of VM-Series"
+            },
+            "defaultValue": {
+                "publicIpAddressName": "publicIP",
+                "domainNameLabel": "Unique name"
+            },
+            "options": {
+                "hideNone": true
+            }
+          },
+       {
+        "name": "vmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Name of the VM-Series VM",
+        "toolTip": "This name will appear in the resource group for the VM",
+        "constraints": {
+            "required": true,
+            "regex": "^[a-z0-9](?:[a-z0-9]|(\\-(?!\\-))){8,24}[a-z0-9]$|^\\$root$",
+            "validationMessage": "Names must be between 8 and 24 characters long, and can contain numbers, lowercase letters and dash"
+         },
+         "osPlatform": "Linux"
+       },
+          {
+            "name": "vmSize",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "Virtual machine size",
+            "toolTip": "The size of Azure virtual machine to provision",
+            "recommendedSizes": [
+              "Standard_D3",
+              "Standard_D4"
+            ],
+            "constraints": {
+              "allowedSizes": [
+                "Standard_D3",
+                "Standard_D4"
+              ]
+            },
+            "osPlatform": "Linux",
+            "imageReference": {
+              "publisher": "paloaltonetworks",
+              "offer": "vm-series-testpass1-preview",
+              "sku": "vmseriesbyol"
+            }
+          }, {
+            "name": "imageSku",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Image SKU for VM-Series firewall",
+            "defaultValue": "VM Series BYOL",
+            "toolTip": "Image SKU for VM-Series firewall",
+            "constraints": {
+              "allowedValues": [
+                {
+                  "label": "VM Series BYOL",
+		  "value": "vmseriesboyl"
+                },
+                {
+                  "label": "VM Series Bundle1",
+		  "value": "vmseriesbundle1"
+                },
+                {
+                  "label": "VM Series Bundle2",
+		  "value": "vmseriesbundle2"
+                }
+              ],
+	      "required": true
+            }
+          }, {
+            "name": "imageOffer",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Image Offer of PANW firewall",
+            "defaultValue": "VM Series TestPass1 Preview",
+            "toolTip": "Image Offer of VM-Series firewall",
+            "constraints": {
+              "allowedValues": [
+                {
+                  "label": "VM Series TestPass1 Preview",
+                  "value": "vm-series-testpass1-preview"
+                }
+              ],
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": {
+      "newStorageAccount": "[steps('panvnetconfig').newStorageAccount]",
+      "dnsNameForPublicIP": "[steps('SamplePANVMConfig').dnsNameForPublicIP]",
+      "vmName": "[steps('SamplePANVMConfig').vmName]",
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('SSHCredntials').password]",
+      "vmSize": "[steps('SamplePANVMConfig').vmSize]",
+      "ipAddressPrefix": "[steps('panvnetconfig').ipAddressPrefix]",
+      "srcIPInboundNSG": "[steps('panvnetconfig').srcIPInboundNSG]",
+      "imageOffer": "[steps('SamplePANVMConfig').imageOffer]",
+      "imageSku": "[steps('SamplePANVMConfig').imageSku]"
+    }
+  }
+}
