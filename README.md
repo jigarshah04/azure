@@ -1,1 +1,1 @@
-# VM-Series BYOL
+# VM-Series from Palo Alto Networks for Microsoft Azure
