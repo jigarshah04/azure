@@ -7,7 +7,7 @@
         "name": "adminUsername",
         "type": "Microsoft.Compute.UserNameTextBox",
         "label": "Username",
-        "toolTip": "Username for Palo Alto Networks VM-Series next-generation firewall.",
+        "toolTip": "Username for Palo Alto Networks VM-Series next-generation firewall",
         "osPlatform": "Linux"
       },
       {
@@ -99,8 +99,8 @@
        {
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
-        "label": "Name of VM-Series VM",
-        "toolTip": "Name of VM-Series VM in resource group after deployment",
+        "label": "VM name of VM-Series",
+        "toolTip": "VM name in resource group after deployment",
         "constraints": {
             "required": true,
             "regex": "^[a-z0-9](?:[a-z0-9]|(\\-(?!\\-))){8,24}[a-z0-9]$|^\\$root$",
@@ -129,44 +129,6 @@
               "offer": "vm-series-testpass1-preview",
               "sku": "vmseriesbyol"
             }
-          }, {
-            "name": "imageSku",
-            "type": "Microsoft.Common.DropDown",
-            "label": "Image SKU for VM-Series",
-            "defaultValue": "VM-Series (BYOL)",
-            "toolTip": "Image SKU for VM-Series",
-            "constraints": {
-              "allowedValues": [
-                {
-                  "label": "VM-Series (BYOL)",
-		  "value": "vmseriesboyl"
-                },
-                {
-                  "label": "VM-Series Bundle1 (PAYG)",
-		  "value": "vmseriesbundle1"
-                },
-                {
-                  "label": "VM-Series Bundle2 (PAYG)",
-		  "value": "vmseriesbundle2"
-                }
-              ],
-	      "required": true
-            }
-          }, {
-            "name": "imageOffer",
-            "type": "Microsoft.Common.DropDown",
-            "label": "Image offer of VM-Series",
-            "defaultValue": "VM Series TestPass1 Preview",
-            "toolTip": "Image offer of VM-Series",
-            "constraints": {
-              "allowedValues": [
-                {
-                  "label": "VM Series TestPass1 Preview",
-                  "value": "vm-series-testpass1-preview"
-                }
-              ],
-              "required": true
-            }
           }
         ]
       }
@@ -179,9 +141,7 @@
       "adminPassword": "[basics('SSHCredntials').password]",
       "vmSize": "[steps('VMSeriesConfig').vmSize]",
       "ipAddressPrefix": "[steps('panvnetconfig').ipAddressPrefix]",
-      "srcIPInboundNSG": "[steps('panvnetconfig').srcIPInboundNSG]",
-      "imageOffer": "[steps('VMSeriesConfig').imageOffer]",
-      "imageSku": "[steps('VMSeriesConfig').imageSku]"
+      "srcIPInboundNSG": "[steps('panvnetconfig').srcIPInboundNSG]"
     }
   }
 }
