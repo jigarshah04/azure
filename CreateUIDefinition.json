@@ -36,7 +36,7 @@
     "steps": [
       {
         "name": "panvnetconfig",
-        "label": "VM-Series Storage and Networking",
+        "label": "Storage and Networking",
         "subLabel": {
           "preValidation": "Configure PA-VM",
           "postValidation": "Done"
@@ -62,8 +62,8 @@
             {
                "name": "srcIPInboundNSG",
                "type": "Microsoft.Common.TextBox",
-               "label": "NSG inbound source IP",
-               "toolTip": "Provide your source IP to restrict access to public interfaces",
+               "label": "Network Security Group: inbound source IP",
+               "toolTip": "Provide your source IP address (or range) to restrict access to public interfaces",
                "defaultValue": "199.167.55.50/32",
                "osPlatform": "Linux"
             }
@@ -71,12 +71,12 @@
       },
       {
         "name": "SamplePANVMConfig",
-        "label": "VM-Series configuration",
+        "label": "VM-Series Configuration",
         "subLabel": {
           "preValidation": "Configure PA-VM",
           "postValidation": "Done"
         },
-        "bladeTitle": "VM-Series configuration",
+        "bladeTitle": "VM-Series Configuration",
         "elements": [
          {
             "name": "dnsNameForPublicIP",
@@ -86,7 +86,7 @@
                 "domainNameLabel": "DNS Name"
             },
             "toolTip": {
-                "domainNameLabel": "Unique DNS name for public IP of VM-Series management interface (eth0)"
+                "domainNameLabel": "Unique DNS name for public IP of management interface (eth0)"
             },
             "defaultValue": {
                 "publicIpAddressName": "publicIP",
@@ -100,7 +100,7 @@
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
         "label": "Name of VM-Series",
-        "toolTip": "Name of VM in resource group after deployment",
+        "toolTip": "Name of VM-Series VM in resource group after deployment",
         "constraints": {
             "required": true,
             "regex": "^[a-z0-9](?:[a-z0-9]|(\\-(?!\\-))){8,24}[a-z0-9]$|^\\$root$",
@@ -132,9 +132,9 @@
           }, {
             "name": "imageSku",
             "type": "Microsoft.Common.DropDown",
-            "label": "Image SKU for PANW firewall",
+            "label": "Image SKU for VM-Series",
             "defaultValue": "VM Series BYOL",
-            "toolTip": "Image SKU for PANW firewall",
+            "toolTip": "Image SKU for VM-Series",
             "constraints": {
               "allowedValues": [
                 {
@@ -157,7 +157,7 @@
             "type": "Microsoft.Common.DropDown",
             "label": "Image Offer of VM-Series firewall",
             "defaultValue": "VM Series TestPass1 Preview",
-            "toolTip": "Image Offer of PANW firewall",
+            "toolTip": "Image Offer of VM-Series firewall",
             "constraints": {
               "allowedValues": [
                 {
