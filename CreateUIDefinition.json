@@ -70,7 +70,7 @@
           ]
       },
       {
-        "name": "VM-SeriesConfig",
+        "name": "SamplePANVMConfig",
         "label": "VM-Series Configuration",
         "subLabel": {
           "preValidation": "Configure PA-VM",
@@ -140,6 +140,14 @@
                 {
                   "label": "VM-Series (BYOL)",
 		  "value": "vmseriesboyl"
+                },
+                {
+                  "label": "VM-Series Bundle1 (PAYG)",
+		  "value": "vmseriesbundle1"
+                },
+                {
+                  "label": "VM-Series Bundle2 (PAYG)",
+		  "value": "vmseriesbundle2"
                 }
               ],
 	      "required": true
@@ -165,15 +173,15 @@
     ],
     "outputs": {
       "newStorageAccount": "[steps('panvnetconfig').newStorageAccount]",
-      "dnsNameForPublicIP": "[steps('VM-SeriesConfig').dnsNameForPublicIP]",
-      "vmName": "[steps('VM-SeriesConfig').vmName]",
+      "dnsNameForPublicIP": "[steps('SamplePANVMConfig').dnsNameForPublicIP]",
+      "vmName": "[steps('SamplePANVMConfig').vmName]",
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('SSHCredntials').password]",
-      "vmSize": "[steps('VM-SeriesConfig').vmSize]",
+      "vmSize": "[steps('SamplePANVMConfig').vmSize]",
       "ipAddressPrefix": "[steps('panvnetconfig').ipAddressPrefix]",
       "srcIPInboundNSG": "[steps('panvnetconfig').srcIPInboundNSG]",
-      "imageOffer": "[steps('VM-SeriesConfig').imageOffer]",
-      "imageSku": "[steps('VM-SeriesConfig').imageSku]"
+      "imageOffer": "[steps('SamplePANVMConfig').imageOffer]",
+      "imageSku": "[steps('SamplePANVMConfig').imageSku]"
     }
   }
 }
