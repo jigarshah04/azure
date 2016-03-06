@@ -7,7 +7,7 @@
         "name": "adminUsername",
         "type": "Microsoft.Compute.UserNameTextBox",
         "label": "Username",
-        "toolTip": "Usrname for VM-Series next-generation firewall.",
+        "toolTip": "Username for VM-Series next-generation firewall.",
         "osPlatform": "Linux"
       },
       {
@@ -41,7 +41,7 @@
           "preValidation": "Configure PA-VM",
           "postValidation": "Done"
         },
-        "bladeTitle": "VM-Series Storage and Networking",
+        "bladeTitle": "Storage and Networking",
         "elements": [
             {
                "name": "newStorageAccount",
@@ -83,14 +83,14 @@
             "type": "Microsoft.Network.PublicIpAddressCombo",
             "label": {
                 "publicIpAddress": "Public IP address",
-                "domainNameLabel": "DNS Prefix"
+                "domainNameLabel": "DNS Name"
             },
             "toolTip": {
-                "domainNameLabel": "DNS name for public IP of VM-Series management interface (eth0)"
+                "domainNameLabel": "Unique DNS name for public IP of VM-Series management interface (eth0)"
             },
             "defaultValue": {
                 "publicIpAddressName": "publicIP",
-                "domainNameLabel": "provide_a_unique_name"
+                "domainNameLabel": ""
             },
             "options": {
                 "hideNone": true
