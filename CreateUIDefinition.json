@@ -55,7 +55,7 @@
                "name": "ipAddressPrefix",
                "type": "Microsoft.Common.TextBox",
                "label": "VNET IP address space (/16)",
-               "toolTip": "Creates a VNET with provided prefix",
+               "toolTip": "Creates a VNET with provided private IP prefix (RFC 1918). Format: xxx.yyy",
                "defaultValue": "192.168",
                "osPlatform": "Linux"
             },
@@ -64,7 +64,7 @@
                "type": "Microsoft.Common.TextBox",
                "label": "Network Security Group: inbound source IP",
                "toolTip": "Provide your source IP address (or range) to restrict access to public interfaces",
-               "defaultValue": "199.167.55.50/32",
+               "defaultValue": "",
                "osPlatform": "Linux"
             }
           ]
@@ -86,7 +86,7 @@
                 "domainNameLabel": "DNS Name"
             },
             "toolTip": {
-                "domainNameLabel": "Unique DNS name for public IP of management interface (eth0)"
+                "domainNameLabel": "Unique DNS name prefix for public IP of management interface (eth0)"
             },
             "defaultValue": {
                 "publicIpAddressName": "publicIP",
@@ -99,7 +99,7 @@
        {
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
-        "label": "Name of VM-Series",
+        "label": "Name of VM-Series VM",
         "toolTip": "Name of VM-Series VM in resource group after deployment",
         "constraints": {
             "required": true,
@@ -155,9 +155,9 @@
           }, {
             "name": "imageOffer",
             "type": "Microsoft.Common.DropDown",
-            "label": "Image Offer of VM-Series firewall",
+            "label": "Image offer of VM-Series",
             "defaultValue": "VM Series TestPass1 Preview",
-            "toolTip": "Image Offer of VM-Series firewall",
+            "toolTip": "Image offer of VM-Series",
             "constraints": {
               "allowedValues": [
                 {
