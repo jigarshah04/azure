@@ -133,12 +133,12 @@
             "name": "imageSku",
             "type": "Microsoft.Common.DropDown",
             "label": "Image SKU for VM-Series",
-            "defaultValue": "VM Series BYOL",
+            "defaultValue": "VM-Series (BYOL)",
             "toolTip": "Image SKU for VM-Series",
             "constraints": {
               "allowedValues": [
                 {
-                  "label": "VM-Series BYOL",
+                  "label": "VM-Series (BYOL)",
 		  "value": "vmseriesboyl"
                 },
                 {
