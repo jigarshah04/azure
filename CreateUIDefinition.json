@@ -7,7 +7,7 @@
         "name": "adminUsername",
         "type": "Microsoft.Compute.UserNameTextBox",
         "label": "Username",
-        "toolTip": "Admin username for the virtual machines. Same Credientials is to SSH to the box.",
+        "toolTip": "Usrname for VM-Series next-generation firewall.",
         "osPlatform": "Linux"
       },
       {
@@ -36,12 +36,12 @@
     "steps": [
       {
         "name": "panvnetconfig",
-        "label": "Palo Alto Networks VM Storage and Networking config",
+        "label": "VM-Series Storage and Networking",
         "subLabel": {
           "preValidation": "Configure PA-VM",
           "postValidation": "Done"
         },
-        "bladeTitle": "Palo Alto Networks VM Storage and Networking config",
+        "bladeTitle": "VM-Series Storage and Networking",
         "elements": [
             {
                "name": "newStorageAccount",
@@ -54,16 +54,16 @@
             {
                "name": "ipAddressPrefix",
                "type": "Microsoft.Common.TextBox",
-               "label": "VNET IP address prefix to use for VNET",
-               "toolTip": "VNET IP prefix for vnet",
+               "label": "VNET IP address space (/16)",
+               "toolTip": "Creates a VNET with provided prefix",
                "defaultValue": "192.168",
                "osPlatform": "Linux"
             },
             {
                "name": "srcIPInboundNSG",
                "type": "Microsoft.Common.TextBox",
-               "label": "NSG InBound source-IP",
-               "toolTip": "NSG InBound source-IP",
+               "label": "NSG inbound source IP",
+               "toolTip": "Provide your source IP to restrict access to public interfaces",
                "defaultValue": "199.167.55.50/32",
                "osPlatform": "Linux"
             }
@@ -71,12 +71,12 @@
       },
       {
         "name": "SamplePANVMConfig",
-        "label": "Palo Alto Networks VM config",
+        "label": "VM-Series configuration",
         "subLabel": {
           "preValidation": "Configure PA-VM",
           "postValidation": "Done"
         },
-        "bladeTitle": "Palo Alto Networks VM config",
+        "bladeTitle": "VM-Series configuration",
         "elements": [
          {
             "name": "dnsNameForPublicIP",
@@ -86,7 +86,7 @@
                 "domainNameLabel": "DNS Prefix"
             },
             "toolTip": {
-                "domainNameLabel": "DNS Prefix for the VM public IP addresses."
+                "domainNameLabel": "DNS name for public IP of VM-Series management interface (eth0)"
             },
             "defaultValue": {
                 "publicIpAddressName": "publicIP",
@@ -99,12 +99,12 @@
        {
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
-        "label": "Name of the PA-VM",
-        "toolTip": "PA-VM Name",
+        "label": "Name of VM-Series",
+        "toolTip": "Name of VM in resource group after deployment",
         "constraints": {
             "required": true,
             "regex": "^[a-z0-9](?:[a-z0-9]|(\\-(?!\\-))){8,24}[a-z0-9]$|^\\$root$",
-            "validationMessage": "names must be between 8 and 24 characters long, and can contain numbers, lowercase letters and dash"
+            "validationMessage": "VM names must be between 8 and 24 characters long, and can contain numbers, lowercase letters and dash"
          },
          "osPlatform": "Linux"
        },
@@ -112,7 +112,7 @@
             "name": "vmSize",
             "type": "Microsoft.Compute.SizeSelector",
             "label": "Virtual machine size",
-            "toolTip": "The size of virtual machine to provision for each cluster node.",
+            "toolTip": "Size of Azure virtual machine to provision for VM-Series",
             "recommendedSizes": [
               "Standard_D3",
               "Standard_D4"
@@ -138,15 +138,15 @@
             "constraints": {
               "allowedValues": [
                 {
-                  "label": "VM Series BYOL",
+                  "label": "VM-Series BYOL",
 		  "value": "vmseriesboyl"
                 },
                 {
-                  "label": "VM Series Bundle1",
+                  "label": "VM-Series Bundle1 (PAYG)",
 		  "value": "vmseriesbundle1"
                 },
                 {
-                  "label": "VM Series Bundle2",
+                  "label": "VM-Series Bundle2 (PAYG)",
 		  "value": "vmseriesbundle2"
                 }
               ],
@@ -155,7 +155,7 @@
           }, {
             "name": "imageOffer",
             "type": "Microsoft.Common.DropDown",
-            "label": "Image Offer of PANW firewall",
+            "label": "Image Offer of VM-Series firewall",
             "defaultValue": "VM Series TestPass1 Preview",
             "toolTip": "Image Offer of PANW firewall",
             "constraints": {
